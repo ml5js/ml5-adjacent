@@ -1,4 +1,14 @@
-// Crepe varialbes
+// Copyright (c) 2018 ml5
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+/* ===
+ml5 Example
+A game using pitch Detection with CREPE
+=== */
+
+// Crepe variables
 let crepe;
 const voiceLow = 100;
 const voiceHigh = 500;
@@ -16,8 +26,7 @@ let currentText = '';
 let textCoordinates;
 
 function createCrepe() {
-  crepe = new ml5.Crepe(getAudioContext(), audioStream.stream);
-  console.log(crepe);
+  crepe = ml5.pitchDetection('Crepe', getAudioContext(), audioStream.stream);
   loop();
 }
 
@@ -26,19 +35,24 @@ function getNoteFromMidiNum(midiNum) {
   return note;
 }
 
+
 function setup() {
-  createCanvas(1200, 600);
-  gameReset();
-  textCoordinates = [windowWidth / 2, 30];
+  let canvas = createCanvas(320, 240).hide();
+  let button = createButton('start microphone').mousePressed(() => {
+    canvas.show();
+    gameReset();
+    audioStream = new p5.AudioIn(function(err) {
+      console.error(err);
+    });
+    audioStream.start(createCrepe, function(err) {
+      console.error(err);
+    });
+    fft = new p5.FFT();
+    button.hide();
+  });
+  textCoordinates = [width / 2, 30];
   textAlign(CENTER);
   noLoop();
-  audioStream = new p5.AudioIn(function(err) {
-    console.error(err);
-  });
-  audioStream.start(createCrepe, function(err) {
-    console.error(err);
-  });
-  fft = new p5.FFT();
 }
 
 function parse(result) {
@@ -55,12 +69,12 @@ function hit(goalHeight, note) {
   noLoop();
   background(240);
   fill(138, 43, 226);
-  ellipse(windowWidth / 2, goalHeight, circleSize, circleSize);
+  ellipse(width / 2, goalHeight, circleSize, circleSize);
   textSize(18);
   fill(255);
-  text(note, windowWidth / 2, goalHeight + (circleSize / 6));
+  text(note, width / 2, goalHeight + (circleSize / 6));
   fill(50);
-  textSize(100);
+  textSize(32);
   text("Hooray!", textCoordinates[0], textCoordinates[1] + 80);
   setTimeout(gameReset, 3000);
 }
@@ -69,19 +83,19 @@ function drawCircles() {
   noStroke();
   //GOAL CIRCLE
   fill(255, 0, 0);
-  goalHeight = map(goalNote, 0, scale.length - 1, windowHeight - 100, 150);
-  ellipse(windowWidth / 2, goalHeight, circleSize, circleSize);
+  goalHeight = map(goalNote, 0, scale.length - 1, height - 100, 150);
+  ellipse(width / 2, goalHeight, circleSize, circleSize);
   fill(255);
-  text(scale[goalNote], (windowWidth / 2), goalHeight + (circleSize / 6));
+  text(scale[goalNote], (width / 2), goalHeight + (circleSize / 6));
   //PITCH CIRCLE
   if (currentNote != '') {
     fill(0, 0, 255);
-    currentHeight = map(scale.indexOf(currentNote), 0, scale.length - 1, windowHeight - 100, 150);
-    ellipse(windowWidth / 2, currentHeight, circleSize, circleSize);
+    currentHeight = map(scale.indexOf(currentNote), 0, scale.length - 1, height - 100, 150);
+    ellipse(width / 2, currentHeight, circleSize, circleSize);
     fill(255);
-    text(scale[scale.indexOf(currentNote)], windowWidth / 2, currentHeight + (circleSize / 6));
+    text(scale[scale.indexOf(currentNote)], width / 2, currentHeight + (circleSize / 6));
     //IF TARGET IS HIT
-    if (dist(windowWidth / 2, currentHeight, windowWidth / 2, goalHeight) < circleSize / 2) {
+    if (dist(width / 2, currentHeight, width / 2, goalHeight) < circleSize / 2) {
       hit(goalHeight, scale[goalNote]);
     }
   }
@@ -90,8 +104,8 @@ function drawCircles() {
 function drawText() {
   fill(50);
   noStroke();
-  textSize(18);
-  text("Hum or sing to hit the right pitch! Notes will match no matter the octave.", textCoordinates[0], textCoordinates[1]);
+  textSize(12);
+  text("Hum or sing to hit the right pitch!\nNotes will match no matter the octave.", textCoordinates[0], textCoordinates[1]);
   text(currentText, textCoordinates[0], textCoordinates[1] + 35);
   if (currentNote != '') {
     text("NOTE: " + currentNote, textCoordinates[0], textCoordinates[1] + 35);
