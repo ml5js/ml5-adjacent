@@ -4,12 +4,10 @@ iframe embeds for the ml5 Adjacent article
 
 Links:
 
-https://ml5js.github.io/ml5-adjacent/Crepe_Game/
-
-https://ml5js.github.io/ml5-adjacent/ImageClassification_Video/
-
-https://ml5js.github.io/ml5-adjacent/PoseNet/
-
-https://ml5js.github.io/ml5-adjacent/StyleTransfer_Image/
-
-https://ml5js.github.io/ml5-adjacent/Word2Vec/
+1. Drag and drop image: https://ml5js.github.io/ml5-homepage-demo/
+2. Image classificaiton video: https://ml5js.github.io/ml5-adjacent/02_ImageClassification_Video/
+3. LSTM Generation: https://ml5js.github.io/ml5-adjacent/03_LSTM_Text
+4. Style Transfer: https://ml5js.github.io/ml5-adjacent/04_StyleTransfer_Image/
+5. Crepe pitch detection: https://ml5js.github.io/ml5-adjacent/05_Crepe_Game/
+6. Word2Vec: https://ml5js.github.io/ml5-adjacent/06_Word2Vec/
+7. PoseNet: https://ml5js.github.io/ml5-adjacent/07_PoseNet/
