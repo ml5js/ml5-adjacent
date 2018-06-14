@@ -1,5 +1,5 @@
 // Copyright (c) 2018 ml5
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -10,11 +10,11 @@ This uses a pre-trained model on a corpus of Nietschze
 === */
 
 // Create the LSTM Generator passing it the model directory
-const lstm = ml5.LSTMGenerator('models/hemingway/', modelReady);
+const lstm = ml5.LSTMGenerator('models/zora_neale_hurston/', modelReady);
 
 let textInput;
-let lengthSlider;
-let tempSlider;
+// let lengthSlider;
+// let tempSlider;
 let button;
 
 function modelReady() {
@@ -26,20 +26,20 @@ function setup() {
 
   // Grab the DOM elements
   textInput = select('#textInput');
-  lengthSlider = select('#lenSlider');
-  tempSlider = select('#tempSlider');
+  // lengthSlider = select('#lenSlider');
+  // tempSlider = select('#tempSlider');
   button = select('#generate');
 
   // DOM element events
   button.mousePressed(generate);
-  lengthSlider.input(updateSliders);
-  tempSlider.input(updateSliders);
+  // lengthSlider.input(updateSliders);
+  // tempSlider.input(updateSliders);
 
   // Update the slider values
-  function updateSliders() {
-    select('#length').html(lengthSlider.value());
-    select('#temperature').html(tempSlider.value());
-  }
+  // function updateSliders() {
+  //   select('#length').html(lengthSlider.value());
+  //   select('#temperature').html(tempSlider.value());
+  // }
 }
 
 // Generate new text
@@ -59,8 +59,8 @@ function generate() {
     // TODO: What are the defaults?
     let data = {
       seed: txt,
-      temperature: tempSlider.value(),
-      length: lengthSlider.value()
+      temperature: 0.5,
+      length: 50
     };
 
     // Generate text with the lstm
