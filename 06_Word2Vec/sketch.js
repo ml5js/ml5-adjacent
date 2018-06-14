@@ -1,17 +1,15 @@
 // Copyright (c) 2018 ml5
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
 /* ===
-ML5 Example
-Word2Vecs
-Simple Word2Vec Example with p5.js
-Using a pre-trained model on common English words. Source: (TODO)
+ml5 Example
+Word2Vec example with p5.js. Using a pre-trained model on common English words.
 === */
 
 // Create the Word2Vec methods
-const word2Vec = new ml5.Word2Vec('data/wordvecs10000.json', modelLoaded);
+const word2Vec = ml5.word2vec('data/wordvecs10000.json', modelLoaded);
 let modelReady = false;
 
 function setup() {
@@ -33,18 +31,6 @@ function setup() {
   let addButton = select("#submit3");
   let addResults = select("#results3");
 
-  nearButton.mousePressed(() => {
-    let word = nearWordInput.value();
-    nearResults.html(findNearest(word, 10));
-  });
-
-  betweenButton.mousePressed(() => {
-    let word1 = betweenWordInput1.value();
-    let word2 = betweenWordInput2.value();
-    let average = word2Vec.average([word1, word2], 1);
-    betweenResults.html(average[0].vector);
-  });
-
   addButton.mousePressed(() => {
     let is1 = addInput1.value();
     let to1 = addInput2.value();
@@ -55,12 +41,12 @@ function setup() {
   });
 }
 
-function modelLoaded () {
+function modelLoaded() {
   modelReady = true;
 }
 
-function findNearest(word, n=10) {
-  if(modelReady){
+function findNearest(word, n = 10) {
+  if (modelReady) {
     let nearest = word2Vec.nearest(word, n);
     if (!nearest) {
       return 'No word vector found';
@@ -70,6 +56,6 @@ function findNearest(word, n=10) {
       output += nearest[i].vector + '<br/>';
     }
     return output;
-  } 
+  }
   return 'Model has not loaded yet!';
 }
