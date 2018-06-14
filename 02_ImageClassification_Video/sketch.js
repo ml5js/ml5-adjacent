@@ -1,29 +1,59 @@
 // Copyright (c) 2018 ml5
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
 /* ===
-ML5 Example
-Webcam Classification using p5.js
+ml5 Example
+Webcam Image Classification using Mobilenet and p5.js
 === */
 
-// Initialize the Image Classifier method.
 let classifier;
 let video;
 
+let img;
+
+let videoStarted = false;
+
+function preload() {
+  //img = loadImage('starter.png');
+  img = createImg('starter.png');
+}
+
 function setup() {
-  noCanvas();
-  // Create a camera input
-  video = createCapture(VIDEO);
-  // Create the classifier with the video element
-  classifier = new ml5.ImageClassifier(video);
-  // Call the classifyFrame function to start classifying the video
-  classifyFrame();
+  createCanvas(320, 240);
+  img.hide();
+  classifier = ml5.imageClassifier('MobileNet', modelReady);
+  setTimeout(() => classifier.predict(img, gotResult), 1000);
+
+  select('#videoButton').mousePressed(() => {
+    video = createCapture(VIDEO);
+    video.hide();
+    classifier = ml5.imageClassifier('MobileNet', video);
+    videoStarted = true;
+    classifyVideo();
+  });
+
+  // classifyVideo();
+}
+
+function modelReady() {
+  console.log('ready');
+  // classifier.predict(img, gotResult);
+}
+
+
+function draw() {
+  background(0);
+  if (videoStarted) {
+    image(video, 0, 0, 320, 240);
+  } else {
+    image(img, 0, 0, 320, 240);
+  }
 }
 
 // Get a prediction for the current video frame
-function classifyFrame() {
+function classifyVideo() {
   classifier.predict(gotResult);
   // You can also specify the amount of classes detected you want
   // classifier.predict(10, gotResult)
@@ -34,5 +64,7 @@ function gotResult(results) {
   // The results are in an array ordered by probability.
   select('#result').html(results[0].className);
   select('#probability').html(nf(results[0].probability, 0, 2));
-  classifyFrame();
+  if (videoStarted) {
+    setTimeout(classifyVideo, 100);
+  }
 }

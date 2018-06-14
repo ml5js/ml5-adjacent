@@ -1,6 +1,6 @@
 <!--
  Copyright (c) 2018 ml5
- 
+
  This software is released under the MIT License.
  https://opensource.org/licenses/MIT
 -->
@@ -9,19 +9,19 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Video Camera Image Classification using p5.js</title>
+  <title>Webcam Image Classification using MobileNet and p5.js</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
-  <script src="https://unpkg.com/ml5"></script>
+  <script src="https://unpkg.com/ml5" type="text/javascript"></script>
 
 </head>
 
 <body>
-  <h1>Live webcam image classification</h1>
   <p>
-    My guess is a <span id="result">...</span>.
-    <br/>My confidence is <span id="probability">...</span>.
+    The MobileNet model labeled this as <span id="result">...</span>
+    <br/>with a confidence of <span id="probability">...</span>.
+    <br/><button id="videoButton">start camera</button>
   </p>
   <script src="sketch.js"></script>
 </body>
