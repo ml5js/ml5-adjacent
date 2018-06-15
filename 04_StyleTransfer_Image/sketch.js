@@ -41,7 +41,7 @@ function modelLoaded() {
 function transferImages() {
   statusMsg.html('Applying Style Transfer...!');
   style1.transfer(inputImg, function(result) {
-    createImg(result.src).parent('style');
+    createImg(result.src).parent('canvasContainer');
   });
   statusMsg.html('Done!');
 }

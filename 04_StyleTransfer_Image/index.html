@@ -17,37 +17,94 @@
   <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
 
   <style>
+  @font-face {
+    font-family: 'Apercu';
+    font-style: normal;
+    src: local('Apercu'),
+    local('Apercu Pro Regular'),
+    url('https://ml5js.github.io/ml5-homepage-demo/css/ApercuRegular.ttf') format('truetype');
+  }
+
+  * {
+    font-family: Apercu;
+    text-align: center;
+  }
+
+  body {
+    background: #c79ef812;
+  }
+
+  button {
+    background: #faebd700;
+    color: #0bcf81;
+    border: solid 1px #0bcf81;
+    padding: .6em 2em;
+    line-height: 2;
+    font-size: 12px;
+    font-family: Apercu;
+    cursor: pointer;
+    border-radius: 10px;
+
+  }
+
+  button:hover {
+    color: white;
+    background-color: #0bcf82;
+    border: solid 1px #0bcf82;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+
   img {
     width: 150px;
     height: 150px;
     display: inline;
   }
-  *{
-      font-family: 'Work Sans', sans-serif;
-      text-align: center;
+
+  .row {
+    flex: 1;
+    max-height: 250px;
   }
-  button{
-      margin: 1rem;
-      padding: 4px 7px;
-      background: white;
-      border: 1px solid blue;
+
+  .col {
+    display: flex;
   }
+
+  h6 {
+    font-size: 10px;
+  }
+
+  #canvasContainer{
+    margin: 20px 0px 0px 0px;
+  }
+
   </style>
 </head>
 
 
 <body>
-  <p> 
-  <span id="statusMsg">Loading Models...</span>
-  </p>
-  <p>Input Image:</p>
-  <img src="img/patagonia.jpg" alt="input img" id="inputImg">
+  <p id="statusMsg">Loading Models...</p>
+  
+  <div class="col">
+    <div class="row">
+      <p>Input Image:</p>
+      <img src="img/patagonia.jpg" alt="input img" id="inputImg">
+
+    </div>
+
+    <div class="row">
+      <p>Style: </p>
+      <img src="img/wave.jpg" alt="style one">
+      <h6> <a href="https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa">The Great Wave off Kanagawa, 1829. <br> Katsushika Hokusai</a></h6>
+    </div>
+
+  </div>
+
   <br>
   <button id="transferBtn">Transfer!</button>
-  <div id="style">
-    <p>Style: <br> <a href="https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa">The Great Wave off Kanagawa, 1829. <br> Katsushika Hokusai</a></p>
-    <img src="img/wave.jpg" alt="style one">
-  </div>
+  <div id="canvasContainer"></div>
   <script src="sketch.js"></script>
 </body>
 

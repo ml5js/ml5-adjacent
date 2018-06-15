@@ -21,7 +21,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(320, 240);
+  createCanvas(320, 240).parent('videoContainer');
   img.hide();
   classifier = ml5.imageClassifier('MobileNet', {}, modelReady);
 
