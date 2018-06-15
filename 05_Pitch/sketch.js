@@ -17,6 +17,7 @@ let fft;
 
 // Circle variables
 let circleSize = 42;
+const circleHeight = 100;
 const scale = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 // Text variables
@@ -65,17 +66,17 @@ function gameReset() {
   loop();
 }
 
-function hit(goalHeight, note) {
+function hit(note) {
   noLoop();
   background(240);
   fill(138, 43, 226);
-  ellipse(width / 2, goalHeight, circleSize, circleSize);
+  ellipse(width / 2, circleHeight, circleSize, circleSize);
   textSize(18);
   fill(255);
-  text(note, width / 2, goalHeight + (circleSize / 6));
+  text(note, width / 2, circleHeight + (circleSize / 6));
   fill(50);
   textSize(32);
-  text("Hooray!", textCoordinates[0], textCoordinates[1] + 80);
+  text("Hooray!", textCoordinates[0], textCoordinates[1]+15);
   setTimeout(gameReset, 3000);
 }
 
@@ -83,21 +84,12 @@ function drawCircles() {
   noStroke();
   //GOAL CIRCLE
   fill(255, 0, 0);
-  goalHeight = map(goalNote, 0, scale.length - 1, height - 100, 150);
-  ellipse(width / 2, goalHeight, circleSize, circleSize);
+  ellipse(width / 2, circleHeight, circleSize, circleSize);
   fill(255);
-  text(scale[goalNote], (width / 2), goalHeight + (circleSize / 6));
-  //PITCH CIRCLE
-  if (currentNote != '') {
-    fill(0, 0, 255);
-    currentHeight = map(scale.indexOf(currentNote), 0, scale.length - 1, height - 100, 150);
-    ellipse(width / 2, currentHeight, circleSize, circleSize);
-    fill(255);
-    text(scale[scale.indexOf(currentNote)], width / 2, currentHeight + (circleSize / 6));
-    //IF TARGET IS HIT
-    if (dist(width / 2, currentHeight, width / 2, goalHeight) < circleSize / 2) {
-      hit(goalHeight, scale[goalNote]);
-    }
+  text(scale[goalNote], (width / 2), circleHeight + (circleSize / 6));
+  //IF TARGET IS HIT
+  if (scale[scale.indexOf(currentNote)] == scale[goalNote]){
+    hit(scale[goalNote]);
   }
 }
 
