@@ -14,6 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
   <script src="https://unpkg.com/ml5" type="text/javascript"></script>
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
 
   <style>
   img {
@@ -21,19 +22,30 @@
     height: 150px;
     display: inline;
   }
+  *{
+      font-family: 'Work Sans', sans-serif;
+      text-align: center;
+  }
+  button{
+      margin: 1rem;
+      padding: 4px 7px;
+      background: white;
+      border: 1px solid blue;
+  }
   </style>
 </head>
 
 
 <body>
-  <p>
-  <button id="transferBtn">Transfer!</button>
+  <p> 
   <span id="statusMsg">Loading Models...</span>
   </p>
   <p>Input Image:</p>
   <img src="img/patagonia.jpg" alt="input img" id="inputImg">
+  <br>
+  <button id="transferBtn">Transfer!</button>
   <div id="style">
-    <p>Style: <a href="https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa">The Great Wave off Kanagawa, 1829 - Katsushika Hokusai</a></p>
+    <p>Style: <br> <a href="https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa">The Great Wave off Kanagawa, 1829. <br> Katsushika Hokusai</a></p>
     <img src="img/wave.jpg" alt="style one">
   </div>
   <script src="sketch.js"></script>
