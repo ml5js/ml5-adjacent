@@ -53,7 +53,7 @@ function draw() {
   if (videoStarted) {
     image(video, 0, 0, w, h);
   } else {
-    image(img, 0, 0, w, h);
+    background(0);
   }
 
   // We can call both functions to draw all keypoints and the skeletons
