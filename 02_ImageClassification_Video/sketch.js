@@ -23,8 +23,7 @@ function preload() {
 function setup() {
   createCanvas(320, 240);
   img.hide();
-  classifier = ml5.imageClassifier('MobileNet', modelReady);
-  setTimeout(() => classifier.predict(img, gotResult), 1000);
+  classifier = ml5.imageClassifier('MobileNet', {}, modelReady);
 
   select('#videoButton').mousePressed(() => {
     video = createCapture(VIDEO);
@@ -38,8 +37,7 @@ function setup() {
 }
 
 function modelReady() {
-  console.log('ready');
-  // classifier.predict(img, gotResult);
+  classifier.predict(img, gotResult);
 }
 
 
