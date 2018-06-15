@@ -21,13 +21,15 @@ let videoStarted = false;
 
 function preload() {
   //img = loadImage('starter.png');
-  img = createImg('starter.png');
-  img.hide();
+  img = createImg('posenet.gif');
+  img.size(200, 200);
+  //img.hide();
 }
 
 
 function setup() {
-  createCanvas(w, h);
+  let canvas = createCanvas(w, h);
+  canvas.hide();
 
   // Create a new poseNet method with a single detection
   poseNet = ml5.poseNet(img, 'single', gotPoses);
@@ -37,6 +39,8 @@ function setup() {
   stroke(255, 0, 0);
 
   select('#videoButton').mousePressed(() => {
+    img.hide();
+    canvas.show();
     video = createCapture(VIDEO);
     video.hide();
     poseNet = ml5.poseNet(video, 'single', gotPoses);
