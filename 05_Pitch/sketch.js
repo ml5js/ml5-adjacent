@@ -117,13 +117,10 @@ function draw() {
       currentNote = '';
     } else {
       result = parse(results['result']);
-      console.log(result);
       currentText = '';
       currentFreq = result;
       let midiNum = freqToMidi(result);
       currentNote = getNoteFromMidiNum(midiNum);
-      console.log(currentNote);
-      console.log('\n');
     }
   }
   drawText();
