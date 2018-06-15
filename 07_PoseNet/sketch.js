@@ -39,12 +39,13 @@ function setup() {
   stroke(255, 0, 0);
 
   select('#videoButton').mousePressed(() => {
-    img.hide();
-    canvas.show();
-    video = createCapture(VIDEO);
-    video.hide();
-    poseNet = ml5.poseNet(video, 'single', gotPoses);
-    videoStarted = true;
+    video = createCapture(VIDEO, () => {
+      img.hide();
+      canvas.show();
+      video.hide();
+      videoStarted = true;
+      poseNet = ml5.poseNet(video, 'single', gotPoses);
+    });
   });
 
 }
@@ -52,10 +53,7 @@ function setup() {
 function draw() {
   if (videoStarted) {
     image(video, 0, 0, w, h);
-  } else {
-    background(0);
   }
-
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
   drawSkeleton();
